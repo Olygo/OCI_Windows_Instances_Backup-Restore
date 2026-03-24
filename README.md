@@ -1,4 +1,4 @@
-# OCI Runbook: Windows VM Backup & Restore with Active Directory
+# OCI Runbook: Windows VM Backup & Restore
 
 This document provides a standardized and validated procedure to perform **backup and restore operations of Windows virtual machines on OCI** while preserving **Active Directory integrity**.
 
@@ -38,7 +38,7 @@ If restored later, password mismatch may occur => trust failure
 
 ### 2.3 Boot Volume backup of a running Windows instance
 
-#### 2.3.1 Crash consistency behavior
+### 2.3.1 Crash consistency behavior
 
 Because the snapshot is taken at block level:
 
@@ -55,7 +55,7 @@ In most cases system usually boots normally but you may encounter :
 - rollback of Windows updates
 - minor file/app inconsistencies
 
-#### 2.3.2 Application-level risks
+### 2.3.2 Application-level risks
 
 Higher risk if workloads include:
 
