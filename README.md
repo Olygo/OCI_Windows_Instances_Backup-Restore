@@ -77,6 +77,7 @@ Potential issues:
 Ensure the VM is stopped before backup.
 
 Effects:
+
 - NTFS buffers flushed
 - Registry committed
 - Services stopped cleanly
@@ -90,6 +91,7 @@ Result:
 ### Step 2 - Create Boot Volume Backup
 
 Using OCI Console or CLI:
+
 - Select Boot Volume
 - Create Backup (Full)
 
@@ -165,7 +167,11 @@ Requirements:
 ```powershell
 Test-ComputerSecureChannel -Verbose
 ```
+Checks the status of the secure channel that the NetLogon service established
 
+```
+nltest /sc_verify:yourdomain.local
+```
 
 #### Step 5 — Repair Trust (if needed)
 
@@ -196,18 +202,19 @@ Add-Computer -DomainName domain.local -Credential domain\admin -Restart
 - OCI does not trigger VSS automatically
 - VSS must be used when VM cannot be stopped
 
-Examples:
-- Veeam
-- Commvault
+Third-party backup tools that support VSS:
+
+- [Veeam](https://helpcenter.veeam.com/docs/agentforwindows/userguide/overview.html?ver=13)
+- [Commvault](https://documentation.commvault.com/saas/protecting_oracle_cloud_infrastructure_oci_with_commvault_cloud.html)
 
 
 ## 7. Critical Restrictions
 
 ### Do NOT:
 
-- Clone domain-joined VMs
-- Restore multiple instances from same backup
-- Use OCI snapshots for Domain Controllers
+- Clone domain-joined VMs (Unless you have terminated the source instance)
+- Restore multiple Domain-Joined instances from same backup
+- Use OCI clone for Domain Controllers
 
 Risks:
 
@@ -218,16 +225,16 @@ Risks:
 
 ## 8. Troubleshooting
 
-### Error:
+### 8.1 Error:
 "The trust relationship between this workstation and the domain failed"
 
-### Resolution:
+### 8.2 Resolution:
 
 ```powershell
 Test-ComputerSecureChannel -Repair -Credential (Get-Credential)
 ```
 
-### Validation:
+### 8.3 Validation:
 
 ```powershell
 Test-ComputerSecureChannel -Verbose
@@ -239,14 +246,14 @@ True
 
 ## 9. Recommendations
 
-- Always stop VM before backup
+- Always stop Windows instances before backup
 - Always validate trust after restore
 - Use AD-aware backup for critical systems
 
 
 ## 10. Appendix
 
-### Quick Recovery Script
+### 10.1 Quick Recovery Script
 
 ```powershell
 if (-not (Test-ComputerSecureChannel)) {
