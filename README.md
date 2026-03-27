@@ -55,7 +55,7 @@ In most cases system usually boots normally but you may encounter :
 - rollback of Windows updates
 - minor file/app inconsistencies
 
-### 2.3.2 Application-level risks
+### 2.3.2 Application-level risks
 
 Higher risk if workloads include:
 
@@ -72,7 +72,7 @@ Potential issues:
 
 ## 3. Backup Procedure (Recommended)
 
-### Step 1 - Graceful Shutdown
+### 3.1 - Graceful Shutdown
 
 Ensure the VM is stopped before backup.
 
@@ -88,7 +88,7 @@ Result:
 - Equivalent or better than application-consistent snapshot
 
 
-### Step 2 - Create Boot Volume Backup
+### 3.2 - Create Boot Volume Backup
 
 Using OCI Console or CLI:
 
@@ -96,7 +96,7 @@ Using OCI Console or CLI:
 - Create Backup (Full)
 
 
-### Step 3 - Restart VM
+### 3.3 - Restart VM
 
 Start the instance after backup completion.
 
